@@ -141,6 +141,8 @@ app.get('/privacypolicy',(req,res)=>{
   res.sendFile(path.join(__dirname+'/views/terms.html'));
 });
 
+
+
 app.listen(port,()=>{
   console.log('listening at port ${port}',port);
 });
