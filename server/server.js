@@ -111,7 +111,7 @@ app.get('/plantedtress',(req,res)=>{
           data['data']=docs;
 
           res.send(data);
-        })
+        });
   });
 
   app.post('/requestedtreesByUser',(req,res)=>{
@@ -142,5 +142,5 @@ app.get('/privacypolicy',(req,res)=>{
 });
 
 app.listen(port,()=>{
-  console.log('listening at port ${port}');
+  console.log('listening at port ${port}',port);
 });
