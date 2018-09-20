@@ -95,7 +95,7 @@ console.log(req.body);
 
 
 app.get('/plantedtress',(req,res)=>{
-  RequestTree.find({},(err,docs)=>{
+  RequestTree.find({isPlanted:true},(err,docs)=>{
           if(err)
           {
             var data ={};
