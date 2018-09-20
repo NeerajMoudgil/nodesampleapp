@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs= require('fs');
+const {ObjectID} = require('mongodb');
 var path    = require("path");
 const port= process.env.PORT || 3000;
 
@@ -114,6 +115,25 @@ app.get('/plantedtress',(req,res)=>{
         });
   });
 
+  app.get('/allrequestedtrees',(req,res)=>{
+    RequestTree.find({},(err,docs)=>{
+            if(err)
+            {
+              var data ={};
+              data['status']=0;
+              data['message']="failed to retrive";
+              data['error']=e
+              return res.status(400).send(data);
+            }
+
+            var data ={};
+            data['status']=1;
+            data['message']="retrived successfully";
+            data['data']=docs;
+
+            res.send(data);
+          });
+    });
   app.post('/requestedtreesByUser',(req,res)=>{
     RequestTree.find({
         email:req.body.email
@@ -136,6 +156,29 @@ app.get('/plantedtress',(req,res)=>{
             res.send(data);
           });
     });
+
+
+
+app.post('/updatePlant', (req, res) => {
+  let id = req.body.id;
+  let latitude = req.body.latitude;
+  let longitude = req.body.longitude;
+  let email = req.body.email;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  RequestTree.findOneAndUpdate({_id: id, email: email}, {$set: {latitude: latitude, longitude:longitude, isPlanted:true }}).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send();
+  })
+});
 
 app.get('/privacypolicy',(req,res)=>{
   res.sendFile(path.join(__dirname+'/views/terms.html'));

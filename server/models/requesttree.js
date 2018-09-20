@@ -43,6 +43,10 @@ var RequestTreeSchema = new mongoose.Schema({
     type:String,
     default:null
   },
+  plant_name:{
+    type:String,
+    default:null
+  },
   createdAt :
   { type : Date, default: Date.now }
 });
