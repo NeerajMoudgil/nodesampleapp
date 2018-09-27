@@ -47,6 +47,14 @@ var RequestTreeSchema = new mongoose.Schema({
     type:String,
     default:null
   },
+  photo_url:{
+    type:String,
+    default:null
+  },
+  hash_tags:{
+    type:String,
+    default:null
+  },
   createdAt :
   { type : Date, default: Date.now }
 });

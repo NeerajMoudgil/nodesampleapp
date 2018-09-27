@@ -164,12 +164,14 @@ app.post('/updatePlant', (req, res) => {
   let latitude = req.body.latitude;
   let longitude = req.body.longitude;
   let email = req.body.email;
+  let photo_url= req.body.photo;
+  let hash_tags= req.body.hashtags;
 
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
 
-  RequestTree.findOneAndUpdate({_id: id, email: email}, {$set: {latitude: latitude, longitude:longitude, isPlanted:true }}).then((todo) => {
+  RequestTree.findOneAndUpdate({_id: id, email: email}, {$set: {latitude: latitude, longitude:longitude, isPlanted:true,photo_url:photo_url,hash_tags:hash_tags }}).then((todo) => {
     if (!todo) {
       return res.status(404).send();
     }
