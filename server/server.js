@@ -184,6 +184,10 @@ app.get('/privacypolicy',(req,res)=>{
   res.sendFile(path.join(__dirname+'/views/terms.html'));
 });
 
+app.get('/credits',(req,res)=>{
+  res.sendFile(path.join(__dirname+'/views/credits.html'));
+});
+
 
 
 app.listen(port,()=>{
